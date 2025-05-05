@@ -32,3 +32,13 @@ app.post("/submit", async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+// Add this to server.js
+app.get("/data", async (req, res) => {
+  try {
+    const response = await fetch("https://api.sheetbest.com/sheets/ef4d1f1d-5f4b-4728-b775-c70af5e5119f");
+    const data = await response.json();
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
